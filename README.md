@@ -17,7 +17,7 @@ I have finished programming the CSS part of the website and this is what I have 
  In the main page I have set all of the font to sans-serif and aligned all the text to center as well as items, then I have set the display of nav to flex to addapt to diffrent screens and I also centerd it with margin of 0, then I have changed the margin of table to -1em because there was a gap between the text and the table, then I have added 10px of margin to each element of the table, I have also changed the background of the body to include two colors together in a nice design. I have then modified h1 in header to make it centered, I have changed the color of all links to be black and have not underline but when you hover over it, it will underline the link.
  I have wrote the same design for all the other pages.  
 
- JS:
+JS:
 Initialization: The code begins by setting up event listeners and initializing variables to work with various elements in your web page, such as buttons, forms, input fields, and containers.
 Toggle Form: The "Start a thread" button allows users to toggle the visibility of the thread creation form. Clicking the button either displays or hides the form, depending on its current state.
 Adding Threads: When the user clicks the "Submit" button in the form, the code collects data from the subject input, comments input, and an optional image upload. It then creates a new thread container to display this data.
