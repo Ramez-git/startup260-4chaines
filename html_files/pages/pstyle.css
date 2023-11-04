@@ -36,3 +36,26 @@ a {
 a:hover {
     text-decoration: underline;
 }
+input{
+    text-align: start;
+}
+textarea{
+    text-align: start;
+}
+footer{
+    text-align: end;
+}
+#formContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#formContainer label,
+#formContainer input,
+#formContainer textarea,
+#formContainer button {
+    margin-bottom: 10px;
+}
+#images{
+    visibility: hidden;
+}

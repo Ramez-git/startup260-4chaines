@@ -14,37 +14,27 @@
         </head>
         <body>
             <button id="showFormButton">Start a thread</button>
-            <form id="start a thread">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="anonymous"><br><br>
-            
-                <label for="Subject">Subject</label>
-                <input type="Subject" id="Subject" name="Subject"><br><br>
-                <label for="comments">Comments</label>
-                <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
-
-                <button>add images</button>
-                <input type="submit" value="Submit">
+            <form id="startThreadForm" style="display: none;">
+                <div id="formContainer">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject">
+                    <label for="comments">Comments:</label>
+                    <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <br><br>
+                    <button type="button" id="addThreadButton">Submit</button>
+                </div>
             </form>
-            
-            <script>
-                // JavaScript to toggle the form's visibility
-                document.getElementById('showFormButton').addEventListener('click', function() {
-                    var form = document.getElementById('submissionForm');
-                    if (form.style.display === 'none' || form.style.display === '') {
-                        form.style.display = 'block';
-                    } else {
-                        form.style.display = 'none';
-                    }
-                });
-            </script>
-            <hr>
-            <h2>Threads</h2>
+            <div id="threads">
+                <hr>
+                <h2>Threads</h2>
+            </div>
             <footer>
                 <hr />
                   <span class="text-reset">Ramez Gammoh</span>
                   <br />
                   <a href="https://github.com/Ramez-git/startup260-BYUchan">GitHub</a>
             </footer>
+            <script src="Javas.js"></script>
         </body>
 </html>

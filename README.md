@@ -16,3 +16,14 @@ I have then wrote all of the other pages(rooms) in my website all have the same 
 I have finished programming the CSS part of the website and this is what I have done:
  In the main page I have set all of the font to sans-serif and aligned all the text to center as well as items, then I have set the display of nav to flex to addapt to diffrent screens and I also centerd it with margin of 0, then I have changed the margin of table to -1em because there was a gap between the text and the table, then I have added 10px of margin to each element of the table, I have also changed the background of the body to include two colors together in a nice design. I have then modified h1 in header to make it centered, I have changed the color of all links to be black and have not underline but when you hover over it, it will underline the link.
  I have wrote the same design for all the other pages.  
+
+ JS:
+Initialization: The code begins by setting up event listeners and initializing variables to work with various elements in your web page, such as buttons, forms, input fields, and containers.
+Toggle Form: The "Start a thread" button allows users to toggle the visibility of the thread creation form. Clicking the button either displays or hides the form, depending on its current state.
+Adding Threads: When the user clicks the "Submit" button in the form, the code collects data from the subject input, comments input, and an optional image upload. It then creates a new thread container to display this data.
+The thread container displays the subject and comments.
+If an image is uploaded, it displays the image with a maximum size of 400x400 pixels.
+Each thread includes a "Delete" button for removing the entire thread.
+Comment Sections: Each thread also contains a comment section that allows users to add comments. Users can input text, click "Add Comment," and the new comment is displayed along with a "Delete" button to remove that specific comment.
+Local Storage: The code makes use of local storage to store and retrieve data. It stores information about threads and comments, including subject, comments, and images, in the user's browser. This allows the page to remember and display previously created threads and comments even after the user leaves or reloads the page.
+Loading Threads from Local Storage: When the page loads, it checks the local storage for previously created threads and comments. It then recreates these threads with their associated comments, subject, and images, providing a seamless user experience.
