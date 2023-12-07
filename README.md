@@ -27,3 +27,33 @@ Each thread includes a "Delete" button for removing the entire thread.
 Comment Sections: Each thread also contains a comment section that allows users to add comments. Users can input text, click "Add Comment," and the new comment is displayed along with a "Delete" button to remove that specific comment.
 Local Storage: The code makes use of local storage to store and retrieve data. It stores information about threads and comments, including subject, comments, and images, in the user's browser. This allows the page to remember and display previously created threads and comments even after the user leaves or reloads the page.
 Loading Threads from Local Storage: When the page loads, it checks the local storage for previously created threads and comments. It then recreates these threads with their associated comments, subject, and images, providing a seamless user experience.
+
+
+1. HTTP Service using Node.js and Express:
+I set up a Node.js project and initialized it using npm init.
+I installed the necessary dependency (express) using npm install express.
+I created a file named server.js for my Express application.
+I wrote JavaScript code in server.js to set up an Express server, specifying that it should listen on port 3000. This file serves as the backbone of my HTTP service.
+
+2. Frontend Served Up Using Express Static Middleware:
+I created a directory named public to store static frontend files.
+I added an HTML file (index.html) inside the public directory.
+I used Express static middleware to serve static files.
+In server.js, I added code to instruct Express to serve static files from the public directory. This allows my frontend files to be accessible to users.
+
+3. Frontend Calls Third-Party Service Endpoints:
+In the HTML file (index.html), I used JavaScript to make a fetch request to a third-party API endpoint.
+I displayed the response in the HTML page.
+Inside the index.html file, I implemented JavaScript code to fetch data from a third-party service using the Fetch API. I handled the response and displayed it in the HTML.
+
+4. Backend Provides Service Endpoints:
+I added service endpoints to the Express server (server.js).
+I created custom endpoints, e.g., /api/third-party-data and /api/custom-endpoint.
+In server.js, I defined routes to handle specific endpoints. For instance, I created an endpoint to fetch data from a third-party service and another one for a custom endpoint.
+
+5. Frontend Calls Your Service Endpoints:
+In the HTML file (index.html), I used JavaScript to make fetch requests to the custom endpoints provided by the backend.
+Inside index.html, I incorporated JavaScript to make requests to the custom endpoints of my backend. This allows my frontend to interact with and consume data from the backend.
+
+By following these steps, I've established a full-stack application with a Node.js backend using Express, a frontend serving static files, and the ability for the frontend to make requests to both third-party services and my custom backend endpoints.
+
