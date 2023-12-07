@@ -1,43 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BYUchan</title>
-    <link rel="icon" type="image/x-icon" href="icon.png">
-    </head>
-    <body>
-<header>
-    <h1 style="font-family: Times New Roman;font-style: bold;"><img src="icon.png" style="width: 1.5em;height: 1.5em;padding-right: .2em;">BYUchan<sup>&Yopf;</sup></h1>
-    <hr />
-    <nav><a href="#">Sign in</a><a href="#" style="text-align: end;margin-left: 1em;">Sign up</a></nav>
-    <h2>Welcome</h2>
-    <h3>Boards and Rooms</h3>
-    <nav>
-        <menu>
-            <table>
-                <tr>
-                    <td><a href="pages/Animal.html">Animals</a></td>
-                    <td><a href="pages/Auto.html">Auto</a></td>
-                    <td><a href="pages/Movies.html">Movies</a></td>
-                    <td><a href="pages/News.html">News</a></td>
-                    
-                </tr>
-                <tr>
-                    <td><a href="pages/Science.html">Science</a></td>
-                    <td><a href="pages/Majors.html">Majors</a></td>
-                    <td><a href="pages/Random.html">Random</a></td>
-                    <td><a href="pages/Video Games.html">Video Games</a></td>
-                </tr>
-        </table>
-</menu>
-    </nav>
-</header>
-<footer style="text-align: end;">
-    <hr />
-      <span class="text-reset">Ramez Gammoh</span>
-      <br />
-      <a href="https://github.com/Ramez-git/startup260-BYUchan">GitHub</a>
-</footer>
-    </body>
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BYUchan</title>
+<link rel="icon" type="image/x-icon" href="icon.png">
+</head>
+
+<body>
+    <header>
+        <h1 style="font-family: Times New Roman;font-style: bold;"><img src="icon.png"
+                style="width: 1.5em;height: 1.5em;padding-right: .2em;">BYUchan<sup>&Yopf;</sup></h1>
+        <hr />
+        <nav><a href="#">Sign in</a><a href="#" style="text-align: end;margin-left: 1em;">Sign up</a></nav>
+        <h2>Welcome</h2>
+        <h3>Boards and Rooms</h3>
+        <nav>
+            <menu>
+                <table>
+                    <tr>
+                        <td><a href="pages/Animal.html">Animals</a></td>
+                        <td><a href="pages/Auto.html">Auto</a></td>
+                        <td><a href="pages/Movies.html">Movies</a></td>
+                        <td><a href="pages/News.html">News</a></td>
+
+                    </tr>
+                    <tr>
+                        <td><a href="pages/Science.html">Science</a></td>
+                        <td><a href="pages/Majors.html">Majors</a></td>
+                        <td><a href="pages/Random.html">Random</a></td>
+                        <td><a href="pages/Video Games.html">Video Games</a></td>
+                    </tr>
+                </table>
+            </menu>
+        </nav>
+        <div style="text-align: end;">
+            <p>Quote of the day: </p>
+            <div id="Quote"></div>
+            <div id="internalserver"></div>
+            <script>
+                async function fetchQuote() {
+                    try {
+                        const response = await fetch('https://api.quotable.io/random');
+                        const data = await response.json();
+                        displayResult(data);
+                    } catch (error) {
+                        console.error(error);
+                        displayResult({ error: 'Failed to fetch the quote.' });
+                    }
+                }
+
+                function displayResult(data) {
+                    const resultElement = document.getElementById('Quote');
+                    if (data.error) {
+                        resultElement.innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        resultElement.innerHTML = `<blockquote>${data.content}</blockquote>
+                                                   <p>- ${data.author}</p>`;
+                    }
+                }
+
+                // Call the function to fetch and display the quote
+                fetchQuote();
+            </script>
+            <script>
+                async function fetchQuote() {
+                    try {
+                        const response = await fetch('https://localhost:3000/api/hello');
+                        const data = await response.json();
+                        displayResult(data);
+                    } catch (error) {
+                        console.error(error);
+                        displayResult({ error: 'Failed to fetch the quote.' });
+                    }
+                }
+
+                function displayResult(data) {
+                    const resultElement = document.getElementById('Quote');
+                    if (data.error) {
+                        resultElement.innerHTML = `<p>${data.error}</p>`;
+                    } else {
+                        resultElement.innerHTML = `<blockquote>${data.content}</blockquote>
+                                                                           <p>- ${data.author}</p>`;
+                    }
+                }
+
+                // Call the function to fetch and display the quote
+                fetchQuote();
+            </script>
+        </div>
+
+
+    </header>
+    <footer style="text-align: end;">
+        <hr />
+        <span class="text-reset">Ramez Gammoh</span>
+        <br />
+        <a href="https://github.com/Ramez-git/startup260-BYUchan">GitHub</a>
+    </footer>
+</body>
+
 </html>
