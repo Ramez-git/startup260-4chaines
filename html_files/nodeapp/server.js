@@ -1,19 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/your_database_name', { useNewUrlParser: true, useUnifiedTopology: true });
+// Connect to MongoDB (replace 'your_database_url' with your actual MongoDB connection string)
+mongoose.connect('mongodb+srv://cs260:lobe12345@cluster0.hffhtse.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 const port = 3000;
 
+// Define a simple mongoose model
 const YourModel = mongoose.model('YourModel', {
   key: String,
   value: String
 });
 
+// Middleware to parse JSON
 app.use(express.json());
 
-// Get all data
+// Endpoint to get data
 app.get('/getData', async (req, res) => {
   try {
     const data = await YourModel.find();
@@ -23,10 +26,10 @@ app.get('/getData', async (req, res) => {
   }
 });
 
-// Save data
+// Endpoint to save data
 app.post('/saveData', async (req, res) => {
   try {
-    const newData = req.body;
+    const newData = req.body; // Assuming you're sending JSON data in the request body
     const savedData = await YourModel.create(newData);
     res.json(savedData);
   } catch (error) {
@@ -34,23 +37,7 @@ app.post('/saveData', async (req, res) => {
   }
 });
 
-// Delete data by ID
-// Delete data by ID
-app.delete('/deleteData/:id', async (req, res) => {
-    try {
-      const idToDelete = req.params.id;
-      console.log('Received ID for deletion:', idToDelete); // Log the received ID for troubleshooting
-      const deletedData = await YourModel.findByIdAndDelete(idToDelete);
-      if (!deletedData) {
-        return res.status(404).json({ error: 'Data not found' });
-      }
-      res.json({ message: 'Data deleted successfully', deletedData });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-  
-
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
