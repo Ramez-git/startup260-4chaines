@@ -57,3 +57,9 @@ Inside index.html, I incorporated JavaScript to make requests to the custom endp
 
 By following these steps, I've established a full-stack application with a Node.js backend using Express, a frontend serving static files, and the ability for the frontend to make requests to both third-party services and my custom backend endpoints.
 
+
+
+
+In this updated server.js file, I've enhanced the server's capabilities to handle both text and image data. Leveraging the Express framework for server creation, Mongoose for MongoDB interactions, and Multer for efficient file uploads, I've now equipped the server to seamlessly manage diverse types of content. The MongoDB schema has been updated to include fields for both text (text) and image (imagePath) data. The Multer middleware is configured to handle file uploads, enabling the server to receive images through the '/saveData' endpoint. This endpoint not only accepts text data in the request body but also processes file uploads for images, storing both types of data in the MongoDB database under the 'DataModel' collection. Additionally, a '/getData' endpoint facilitates the retrieval of all stored data, providing a comprehensive view of text and image entries.
+
+This server exemplifies a versatile solution, catering to applications that require the storage and retrieval of diverse content types. The integration of Multer streamlines the handling of image uploads, while the MongoDB database ensures efficient data storage. Developers can now interact with the server to save and retrieve text and image data, paving the way for applications that involve multimedia content storage and retrieval.
