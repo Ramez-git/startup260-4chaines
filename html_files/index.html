@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" type="text/css" href="styles.css" />
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BYUchan</title>
-<link rel="icon" type="image/x-icon" href="icon.png">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BYUchan</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
 </head>
 
 <body>
     <header>
-        <h1 style="font-family: Times New Roman;font-style: bold;"><img src="icon.png"
-                style="width: 1.5em;height: 1.5em;padding-right: .2em;">BYUchan<sup>&Yopf;</sup></h1>
+        <h1 style="font-family: Times New Roman; font-style: bold;">
+            <img src="icon.png" style="width: 1.5em;height: 1.5em;padding-right: .2em;">BYUchan<sup>&Yopf;</sup>
+        </h1>
         <hr />
-        <form>
+        <form id="loginForm">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
-        
+
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-        
-            <button type="submit">Sign In/Up</button>
-          </form>
-        <h2>Welcome</h2>
+
+            <button type="button" onclick="handleLogin()">Sign In/Up</button>
+        </form>
+        <h2 id="welcomeMessage">Welcome</h2>
         <h3>Boards and Rooms</h3>
         <nav>
             <menu>
@@ -31,7 +34,6 @@
                         <td><a href="pages/Auto.html">Auto</a></td>
                         <td><a href="pages/Movies.html">Movies</a></td>
                         <td><a href="pages/News.html">News</a></td>
-
                     </tr>
                     <tr>
                         <td><a href="pages/Science.html">Science</a></td>
@@ -45,60 +47,12 @@
         <div style="text-align: end;">
             <p>Quote of the day: </p>
             <div id="Quote"></div>
+            <div id="realTimeUpdates">Existing Users: </div> <!-- Updated element for real-time updates -->
             <div id="internalserver"></div>
-            <script>
-                async function fetchQuote() {
-                    try {
-                        const response = await fetch('https://api.quotable.io/random');
-                        const data = await response.json();
-                        displayResult(data);
-                    } catch (error) {
-                        console.error(error);
-                        displayResult({ error: 'Failed to fetch the quote.' });
-                    }
-                }
 
-                function displayResult(data) {
-                    const resultElement = document.getElementById('Quote');
-                    if (data.error) {
-                        resultElement.innerHTML = `<p>${data.error}</p>`;
-                    } else {
-                        resultElement.innerHTML = `<blockquote>${data.content}</blockquote>
-                                                   <p>- ${data.author}</p>`;
-                    }
-                }
-
-                // Call the function to fetch and display the quote
-                fetchQuote();
-            </script>
-            <script>
-                async function fetchQuote() {
-                    try {
-                        const response = await fetch('https://localhost:3000/api/hello');
-                        const data = await response.json();
-                        displayResult(data);
-                    } catch (error) {
-                        console.error(error);
-                        displayResult({ error: 'Failed to fetch the quote.' });
-                    }
-                }
-
-                function displayResult(data) {
-                    const resultElement = document.getElementById('Quote');
-                    if (data.error) {
-                        resultElement.innerHTML = `<p>${data.error}</p>`;
-                    } else {
-                        resultElement.innerHTML = `<blockquote>${data.content}</blockquote>
-                                                                           <p>- ${data.author}</p>`;
-                    }
-                }
-
-                // Call the function to fetch and display the quote
-                fetchQuote();
-            </script>
+            <!-- Real-time updates display -->
+            <div id="realTimeUpdates"></div>
         </div>
-
-
     </header>
     <footer style="text-align: end;">
         <hr />
@@ -106,6 +60,92 @@
         <br />
         <a href="https://github.com/Ramez-git/startup260-BYUchan">GitHub</a>
     </footer>
+
+    <script>
+        async function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:4000/api/data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password,
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Check the newUser property in the response
+                    alert(data.message) ////hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                    document.getElementById('welcomeMessage').innerText = `Welcome, ${username}`;
+                } else {
+                    alert(data.message); // Display error message
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`Failed to connect to the server. Please try again later. Error: ${error.message}`);
+            }
+        }
+    </script>
+
+    <script>
+        async function fetchQuote() {
+            try {
+                const response = await fetch('https://api.quotable.io/random');
+                const data = await response.json();
+                displayResult(data);
+            } catch (error) {
+                console.error(error);
+                displayResult({ error: 'Failed to fetch the quote.' });
+            }
+        }
+
+        function displayResult(data) {
+            const resultElement = document.getElementById('Quote');
+            if (data.error) {
+                resultElement.innerHTML = `<p>${data.error}</p>`;
+            } else {
+                resultElement.innerHTML = `<blockquote>${data.content}</blockquote>
+                                           <p>- ${data.author}</p>`;
+            }
+        }
+
+        // Call the function to fetch and display the quote
+        fetchQuote();
+    </script>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:4000');
+
+        socket.addEventListener('open', (event) => {
+            console.log('WebSocket connection opened');
+        });
+
+        socket.addEventListener('message', (event) => {
+            const data = JSON.parse(event.data);
+            // Handle real-time updates, e.g., update the UI
+            const realTimeUpdatesElement = document.getElementById('realTimeUpdates');
+            if (data.existingUsers) {
+                const userList = data.existingUsers.join(', ');
+                realTimeUpdatesElement.innerText = `Existing Users: ${userList}`;
+            }
+        });
+
+        socket.addEventListener('close', (event) => {
+            console.log('WebSocket connection closed');
+        });
+
+        socket.addEventListener('error', (event) => {
+            console.error('WebSocket error:', event);
+        });
+    </script>
+
 </body>
 
 </html>
